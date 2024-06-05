@@ -1,6 +1,7 @@
 const path = require('path');
 const { VueLoaderPlugin } = require('vue-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   entry: './src/main.js',
@@ -55,6 +56,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        BASE_URL: JSON.stringify(process.env.BASE_URL || '/')
+      }
+    })
   ],
   devServer: {
     historyApiFallback: true,
